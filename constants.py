@@ -5,8 +5,8 @@ _yes_set = set(('y','yes','ye'))
 _no_set = set(('n', 'no'))
 _exit_set = set(('\exit', '\quit', '\q', '\e'))
 #_input = set(('\\n',"\\new"))
-_back = set(('\\bacl','\\b'))
-_test_set =  set(("\\test,\\t",))
+_back = set(('\\back','\\b'))
+_test_set =  set(("\\test", "\\t",))
 _input_mode_set = set(("\input", "\i", "\\n", "\\new"))
 _delete_set = set(('\delete', '\d', '\del'))
 
@@ -16,8 +16,8 @@ Welcome to the learning tool!"""
 
 _main_menu = """
 Type:
-        \"\\test\" to start a test
-        \"\\new\" to insert a new word and its meaning
+        \"\\test" to start a test
+        \"\\new" to insert a new word and its meaning
         \"\\q" to QUIT
-        \"\\del to delete a term"
+        \"\\del" to delete a term
 :"""

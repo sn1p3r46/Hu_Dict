@@ -34,9 +34,11 @@ def load_dictionary():
         en_hu_dic = {}
 
         for line in in_f:
-            
-            hu, en = line.strip().split(" ")
-            hu_en_dic[hu] = en
-            en_hu_dic[en] = hu
+            try:            
+                hu, en = line.strip().split(" ")
+                hu_en_dic[hu] = en
+                en_hu_dic[en] = hu
+            except ValueError:
+                continue
 
     return (hu_en_dic, en_hu_dic)

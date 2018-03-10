@@ -16,17 +16,19 @@ def load_data():
     res = ioh.load_dictionary()
     if res:
         hu_en_dict, en_hu_dict = res
-        print("Personal Dictionary loaded!)")
-        print(hu_en_dict)
+        print("Personal Dictionary loaded! :)")
+        print("Your dictionary contains {} terms".format(len(hu_en_dict)))
+        dictionary_print() 
     else:
         print("Personal Dictionary NOT loaded!")
 
 def start_delete_term():
 
-    # global hu_en_dict
-    # global en_hu_dict
+    if not hu_en_dict:
+        print("Empty dictionary, nothing to delete here!")
+        return
 
-    to_del = input(">>>Type in Hungarian what you want to delete..")
+    to_del = input(">>>Type in Hungarian what you want to delete: ")
     hu_to_del = sanitize_input(to_del)
     en_to_del = hu_en_dict.get(hu_to_del)
 
@@ -37,9 +39,10 @@ def start_delete_term():
     else:
         del hu_en_dict[hu_to_del]
         del en_hu_dict[en_to_del]
+        ioh.write_dictionary(hu_en_dict)
         print(">>>'{}' has been deleted!".format(hu_to_del))
         print(">>>'{}' has been deleted!".format(en_to_del))
-        print("Dictionary now contains {} terms".format(len(hu_en_dict)))
+        print("Dictionary now contains {} term(s)".format(len(hu_en_dict)))
 
 
 def main():
@@ -53,7 +56,8 @@ def main():
 
 def handle_exit():
 
-        if handle_boolean(">>>Do you really want to exit? Type Y[es]/N[o]]"):
+        if handle_boolean(">>>Do you really want"
+                          "to exit? Type Y[es]|[ENTER]/N[o]]:"):
             ioh.write_dictionary(hu_en_dict)
             print(">>>Szia!!!")
             exit()
@@ -133,6 +137,12 @@ def start_input_mode():
     print(en_hu_dict)
     print(hu_en_dict)
 
+def dictionary_print():
+    print("\n\t['HU' ==> 'EN']\n")
+    hu_list = list(hu_en_dict.keys())
+    hu_list.sort()
+    for hu in hu_list:
+        print("\t'{}' ==> '{}'".format(hu, hu_en_dict[hu]))
 
 def process_main_menu_input():
 
@@ -143,13 +153,13 @@ def process_main_menu_input():
         if in_str in cs._exit_set:
             handle_exit()
 
-        if in_str in cs._test_set:
+        elif in_str in cs._test_set:
             start_test() # TODO implement
 
-        if in_str in cs._input_mode_set:
+        elif in_str in cs._input_mode_set:
             start_input_mode()
 
-        if in_str in cs._delete_set:
+        elif in_str in cs._delete_set:
             start_delete_term()
 
         else:
