@@ -14,12 +14,12 @@ def write_dictionary(my_dic):
         with open(os.path.join(_data_abs_path,_file_name), 'w') as out_f:
             for key, value in my_dic.items():
                 out_f.write("{} {}\n".format(key, value))
-    
+
         return True
 
     except:
 
-        return False 
+        return False
 
 
 def load_dictionary():
@@ -34,9 +34,9 @@ def load_dictionary():
         en_hu_dic = {}
 
         for line in in_f:
+            
             hu, en = line.strip().split(" ")
             hu_en_dic[hu] = en
             en_hu_dic[en] = hu
 
     return (hu_en_dic, en_hu_dic)
-        
